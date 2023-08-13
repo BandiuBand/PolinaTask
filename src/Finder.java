@@ -1,5 +1,6 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -36,7 +37,12 @@ public class Finder {
     {
 
         Elements images = htmlContent.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
-        return images;
+        Elements res = new Elements();
+        for (Element element:images) {
+            if (element.attr("class").equals("BLA_wBUJrga_SkfJ8won")&&(element.attr("src").contains("photo")))
+                res.add(element);
+        }
+        return res;
     }
 
     public Document getHtmlContent() {
