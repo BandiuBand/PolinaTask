@@ -25,17 +25,8 @@ public class Main {
 //        } catch (IOException e) {
 //            throw new RuntimeException(e);
 //        }
-        Elements links = finder.getLinks();
-        System.out.println(links.size());
-        String pathDestination = "C:\\pictures\\";
-        int i = 0;
-        for (Element element:links) {
-            String link = element.attr("src");
-            Downloader downloader = new Downloader(link,pathDestination,Integer.toString(i));
-            downloader.start();
-            i++;
-            System.out.println(link);
-            System.out.println();
-        }
+        String url = "https://www.gettyimages.co.uk/photos/travel?assettype=image&license=rf&alloweduse=availableforalluses&embeddable=true&family=creative&phrase=travel&sort=best&page=1";
+        ParallelExecutionController parallelExecutionController = new ParallelExecutionController(url,"c:\\pictures\\");
+
     }
 }
