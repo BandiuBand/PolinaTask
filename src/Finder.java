@@ -1,70 +1,49 @@
-import java.io.BufferedReader;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.ArrayList;
 
 
 public class Finder {
-    private String allLines = null;
+    private Document htmlContent = null;
+    Elements links = null;
     public Finder (String link)
     {
-        allLines = downloader(link);
-       if (allLines == null)
+        htmlContent = downloader(link);
+       if (htmlContent == null)
            throw new RuntimeException("Cant connect");
+       links = findLink();
     }
-    private String downloader(String link)
+    private Document downloader(String link)
     {
-//        try {
-//            URL website = new URL(link);
-//            HttpURLConnection connection = (HttpURLConnection) website.openConnection();
-//
-//            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-//            String inputLine;
-//            StringBuilder htmlContent = new StringBuilder();
-//
-//            while ((inputLine = in.readLine()) != null) {
-//                htmlContent.append(inputLine);
-//            }
-//
-//            in.close();
-//
-//            // Виводимо вміст на консоль (або можна зберегти у файл)
-//            allLines = htmlContent.toString();
-//            return true;
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        try {
-            URL url = new URL(link);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3");
-            int responseCode = httpURLConnection.getResponseCode();
-            String inputLine = null;
-            if(responseCode == HttpURLConnection.HTTP_OK)
-            {
-                InputStreamReader inputStreamReader = new InputStreamReader(httpURLConnection.getInputStream(), "UTF-8");
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                StringBuilder sb=new StringBuilder();
-                while ((inputLine = bufferedReader.readLine()) != null) {
-                    sb.append(bufferedReader.readLine()).append("\n");
-                }
-                allLines=sb.toString();
-                return allLines;
-            }
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
+        try {
+            // Завантаження HTML-коду з веб-сторінки
+
+            Document document = Jsoup.connect(link).get();
+
+            //String htmlContent = document.html();
+            return document;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return null;
     }
+    private Elements findLink()
+    {
 
-    public String getAllLines() {
-        return allLines;
+        Elements images = htmlContent.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+        return images;
+    }
+
+    public Document getHtmlContent() {
+        return htmlContent;
+    }
+
+    public Elements getLinks() {
+        return links;
     }
 }
