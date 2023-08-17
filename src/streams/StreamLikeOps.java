@@ -23,8 +23,20 @@ public class StreamLikeOps {
     }
 
     public static <E> List<E> filter(List<E> elements, Predicate<E> filter) {
-        //TODO Implement me
-        return null;
+        List<E> returnList = null;
+        try {
+            returnList = elements.getClass().newInstance();
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        for (E element: elements) {
+            if(filter.test(element)){
+                returnList.add(element);
+            }
+        }
+        return returnList;
     }
 
     public static <E> boolean anyMatch(List<E> elements, Predicate<E> predicate) {
