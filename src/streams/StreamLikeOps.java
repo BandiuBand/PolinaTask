@@ -40,7 +40,10 @@ public class StreamLikeOps {
     }
 
     public static <E> boolean anyMatch(List<E> elements, Predicate<E> predicate) {
-        //TODO Implement me
+        for (E element:elements) {
+            if (predicate.test(element))
+                return true;
+        }
         return false;
     }
 
