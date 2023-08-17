@@ -1,9 +1,4 @@
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+package threads;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -13,7 +8,7 @@ public class Main {
         // IntelliJ IDEA suggests fixing it.
         System.out.printf("Hello and welcome!");
 
-       //Downloader downloader = new Downloader("https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Nissan_Tiida_C11_003.JPG/300px-Nissan_Tiida_C11_003.JPG","c:\\","1");
+       //threads.Downloader downloader = new threads.Downloader("https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Nissan_Tiida_C11_003.JPG/300px-Nissan_Tiida_C11_003.JPG","c:\\","1");
        //downloader.start();
        Finder finder = new Finder("https://www.gettyimages.co.uk/photos/travel?assettype=image&license=rf&alloweduse=availableforalluses&embeddable=true&family=creative&phrase=travel&sort=best&page=1");
 //        System.out.println(finder.getAllLines());
