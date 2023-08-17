@@ -86,7 +86,9 @@ public class StreamLikeOps {
     }
 
     public static <E> void forEach(List<E> elements, Consumer<E> consumer) {
-        //TODO Implement me
+        for (E element:elements) {
+            consumer.accept(element);
+        }
     }
 
     public static <E> Optional<E> reduce(List<E> elements, BinaryOperator<E> accumulator) {
