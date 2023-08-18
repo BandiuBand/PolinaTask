@@ -146,8 +146,20 @@ public class StreamLikeOps {
                                                         Predicate<E> predicate,
                                                         Supplier<Map<Boolean, List<E>>> mapFactory,
                                                         Supplier<List<E>> listFactory) {
-        //TODO Implement me
-        return null;
+        Map<Boolean,List<E>> resultMap = mapFactory.get();
+
+        List<E> isPartition = listFactory.get();
+        List<E> isntPartition = listFactory.get();
+
+        for (E element: elements) {
+            if(predicate.test(element))
+                isPartition.add(element);
+            else
+                isntPartition.add(element);
+        }
+        resultMap.put(true,isPartition);
+        resultMap.put(false,isntPartition);
+        return resultMap;
     }
 
     public static <T, K> Map<K, List<T>> groupBy(List<T> elements,
