@@ -119,8 +119,15 @@ public class StreamLikeOps {
     }
 
     public static <E> Optional<E> reduce(List<E> elements, BinaryOperator<E> accumulator) {
-        //TODO Implement me
-        return null;
+        if (elements.isEmpty())
+            return Optional.empty();
+
+        E result = elements.get(0);
+
+        for (int i = 1; i < elements.size(); i++) {
+            result = accumulator.apply(result,elements.get(i));
+        }
+        return Optional.of(result);
     }
 
     public static <E> E reduce(E seed, List<E> elements, BinaryOperator<E> accumulator) {
