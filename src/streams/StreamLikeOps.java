@@ -131,8 +131,16 @@ public class StreamLikeOps {
                                             Function<T, U> valueFunction,
                                             BinaryOperator<U> mergeFunction,
                                             Supplier<Map<K, U>> mapFactory) {
-        //TODO Implement me
-        return null;
+
+        Map<K,U> resultMap = mapFactory.get();
+
+        for (T element:elements) {
+            K key = keyFunction.apply(element);
+            U value = valueFunction.apply(element);
+            resultMap.put(key,value);
+        }
+
+        return resultMap;
     }
 
 
