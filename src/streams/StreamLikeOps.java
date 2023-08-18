@@ -170,9 +170,14 @@ public class StreamLikeOps {
         Map<K,List<T>> resultMap = mapFactory.get();
 
         for (T element:elements) {
-            //TODO
+            K key = classifier.apply(element);
+            if (!resultMap.containsKey(key))
+                resultMap.put(key,listFactory.get());
+
+                resultMap.get(key).add(element);
         }
-        return null;
+
+        return resultMap;
     }
 
     public static <T, K, U> Map<K, U> toMap(List<T> elements,
