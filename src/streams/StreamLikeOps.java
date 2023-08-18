@@ -203,8 +203,20 @@ public class StreamLikeOps {
                                                                         Supplier<Map<Boolean, List<T>>> mapFactory,
                                                                         Supplier<List<T>> listFactory,
                                                                         Function<E, T> elementMapper) {
-        //TODO Implement me
-        return null;
+
+        Map<Boolean,List<T>> resultMap = mapFactory.get();
+        List<T> isPartition = listFactory.get();
+        List<T> isntPartition = listFactory.get();
+        for (E element:elements) {
+            if (predicate.test(element))
+                isPartition.add(elementMapper.apply(element));
+            else
+                isntPartition.add(elementMapper.apply(element));
+        }
+
+        resultMap.put(true,isPartition);
+        resultMap.put(false,isntPartition);
+        return resultMap;
     }
 
     public static <T, U, K> Map<K, List<U>> groupByAndMapElement(List<T> elements,
