@@ -166,7 +166,12 @@ public class StreamLikeOps {
                                                  Function<T, K> classifier,
                                                  Supplier<Map<K, List<T>>> mapFactory,
                                                  Supplier<List<T>> listFactory) {
-        //TODO Implement me
+
+        Map<K,List<T>> resultMap = mapFactory.get();
+
+        for (T element:elements) {
+            //TODO
+        }
         return null;
     }
 
