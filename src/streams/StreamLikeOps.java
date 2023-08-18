@@ -66,8 +66,11 @@ public class StreamLikeOps {
     public static <T, R> List<R> map(List<T> elements,
                                      Function<T, R> mappingFunction,
                                      Supplier<List<R>> listFactory) {
-        //TODO Implement me
-        return null;
+        List<R> resultList = listFactory.get();
+        for (T element:elements) {
+            resultList.add(mappingFunction.apply(element));
+        }
+        return resultList;
     }
 
     public static <E> Optional<E> max(List<E> elements, Comparator<E> comparator) {
