@@ -131,8 +131,15 @@ public class StreamLikeOps {
     }
 
     public static <E> E reduce(E seed, List<E> elements, BinaryOperator<E> accumulator) {
-        //TODO Implement me
-        return null;
+        if (elements.isEmpty())
+            return seed;
+
+        E result = seed;
+
+        for (int i = 0; i < elements.size(); i++) {
+            result = accumulator.apply(result,elements.get(i));
+        }
+        return result;
     }
 
     public static <E> Map<Boolean, List<E>> partitionBy(List<E> elements,
