@@ -84,8 +84,14 @@ public class StreamLikeOps {
     }
 
     public static <E> List<E> distinct(List<E> elements, Supplier<List<E>> listFactory) {
-        //TODO Implement me
-        return null;
+
+        List<E> resultList = listFactory.get();
+
+        for (E element:elements) {
+            if(!resultList.contains(element))
+                resultList.add(element);
+        }
+        return resultList;
     }
 
     public static <E> void forEach(List<E> elements, Consumer<E> consumer) {
