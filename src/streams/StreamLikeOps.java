@@ -80,8 +80,14 @@ public class StreamLikeOps {
     }
 
     public static <E> Optional<E> max(List<E> elements, Comparator<E> comparator) {
-        //TODO Implement me
-        return null;
+        if (elements.isEmpty())
+            return Optional.empty();
+        E max = elements.get(0);
+        for (E element:elements) {
+            if (comparator.compare(element,max)>0)
+                max=element;
+        }
+        return Optional.of(max);
     }
 
     public static <E> Optional<E> min(List<E> elements, Comparator<E> comparator) {
