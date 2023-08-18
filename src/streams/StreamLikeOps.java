@@ -18,8 +18,14 @@ public class StreamLikeOps {
     public static <E> List<E> generate(Supplier<E> generator,
                                        Supplier<List<E>> listFactory,
                                        int count) {
-        //TODO Implement me
-        return null;
+
+        List<E> resultList = listFactory.get();
+
+        for (int i = 0; i < count; i++) {
+            resultList.add(generator.get());
+        }
+
+        return resultList;
     }
 
     public static <E> List<E> filter(List<E> elements, Predicate<E> filter) {
