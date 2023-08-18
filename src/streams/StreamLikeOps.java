@@ -91,8 +91,14 @@ public class StreamLikeOps {
     }
 
     public static <E> Optional<E> min(List<E> elements, Comparator<E> comparator) {
-        //TODO Implement me
-        return null;
+        if (elements.isEmpty())
+            return Optional.empty();
+        E min = elements.get(0);
+        for (E element:elements) {
+            if (comparator.compare(element,min)<0)
+                min=element;
+        }
+        return Optional.of(min);
     }
 
     public static <E> List<E> distinct(List<E> elements, Supplier<List<E>> listFactory) {
