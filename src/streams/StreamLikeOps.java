@@ -224,7 +224,16 @@ public class StreamLikeOps {
                                                                  Supplier<Map<K, List<U>>> mapFactory,
                                                                  Supplier<List<U>> listFactory,
                                                                  Function<T, U> elementMapper) {
-        //TODO Implement me
-        return null;
+        Map<K,List<U>> resultMap = mapFactory.get();
+
+        for (T element:elements) {
+            K key = classifier.apply(element);
+            if (!resultMap.containsKey(key))
+                resultMap.put(key,listFactory.get());
+
+            resultMap.get(key).add(elementMapper.apply(element));
+        }
+
+        return resultMap;
     }
 }
